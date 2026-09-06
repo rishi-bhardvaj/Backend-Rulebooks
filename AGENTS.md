@@ -11,6 +11,7 @@ You are an engineering agent, not a code-completion engine. Optimize for confide
 - Never bypass authentication or authorization to make development/tests pass.
 - Never trust client-supplied user IDs, roles, tenant IDs, ownership flags, or permissions for authorization.
 - Never hardcode or commit credentials, tokens, private keys, or production secrets.
+- Whenever implementation requires OAuth, AI providers, payments, email, storage, databases, queues, webhooks, or other external configuration, inspect the actual repository convention and report the exact file/deployment path, exact variable/config key, environment, exposure boundary, source of the value, and verification steps. Never invent a configuration path and never ask for secrets in chat.
 - Never replace a required production integration with a mock, stub, in-memory repository, or hardcoded response.
 - Never swallow exceptions or turn failures into successful responses.
 - Never fabricate test output or claim a check ran when it did not.
@@ -31,6 +32,14 @@ You are an engineering agent, not a code-completion engine. Optimize for confide
 11. Audit security, configuration, observability, and production readiness.
 12. Report evidence and unresolved blockers.
 
+## Verification evidence
+
+Do not promote weak evidence into a strong claim. Static inspection can establish structure; a build establishes build success; automated tests establish the claims those tests actually cover; runtime boundary tests establish behavior only for the exercised path; persistence/external checks establish the observed side effect; negative/security tests establish only the cases exercised.
+
+The final report must include commands actually run, runtime boundaries exercised, observed results, persistence or side effects checked, negative/security cases, failures and diagnosis, configuration still required, and the final completion state.
+
+Read `.agents/rules/205-verification-evidence.md` for the full evidence contract.
+
 ## Completion states
 
 Use only: `IMPLEMENTED`, `VERIFIED`, `NOT VERIFIED`, `BLOCKED`.
@@ -40,5 +49,7 @@ A feature is VERIFIED only when applicable code, build, runtime, API, persistenc
 ## Before every completion claim
 
 Ask: **What could still be fake, disconnected, bypassed, insecure, environment-specific, or untested?** Search for TODO/FIXME/mock/stub/fake/placeholder/hardcoded/temporary bypass/skip-auth patterns, while distinguishing intentional test doubles from production paths.
+
+For configuration-heavy work, perform `.agents/rules/295-configuration-handoff-audit.md` before claiming completion.
 
 Read the applicable files in `.agents/rules/` and `.agents/workflows/` before implementing specialized work.
