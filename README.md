@@ -49,6 +49,11 @@ Agents must distinguish **IMPLEMENTED**, **VERIFIED**, **NOT VERIFIED**, and **B
 5. Real integrations for real features; test doubles only where intentionally scoped.
 6. Least privilege and fail-closed security boundaries.
 7. Evidence before completion claims.
+8. Every required external integration value has an exact configuration handoff and audit trail.
+
+## Verification evidence
+
+`.agents/rules/205-verification-evidence.md` defines how agents should distinguish static, build, automated-test, runtime-boundary, persistence/integration, and negative/security evidence. `.agents/rules/295-configuration-handoff-audit.md` adds a final audit for every required credential, URL, provider setting, and environment value.
 
 ## Inspirations
 
