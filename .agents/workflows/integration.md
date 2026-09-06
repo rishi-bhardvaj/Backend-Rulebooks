@@ -1,0 +1,3 @@
+# Workflow: Integration
+
+Map the integration boundary and data contract. Verify configuration, authentication/credentials, timeouts, retries, rate limits, idempotency, response validation, and failure behavior. Test both successful and failed dependency calls. For frontend/backend integration, trace UI action → network request → backend route → auth → business logic → database/external service → response → UI state.
